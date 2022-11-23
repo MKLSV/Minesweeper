@@ -1,0 +1,33 @@
+.time {
+    background-color: red;
+    width: 100px;
+    height: 50px;
+    display: inline-block;
+}
+
+.restart {
+    width: 80px;
+    height: 50px;
+    display: inline-block;
+    position: absolute;
+}
+.score{
+    background-color: red;
+    width: 100px;
+    height: 50px;
+    display: inline-block;
+    position: absolute;
+    margin-left: 80px;
+}
+
+td{
+    border: solid 1px black;
+    height: 22px;
+    width: 22px;
+    background-color: silver;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+td:hover {
+    background-color: rgb(53, 126, 99);
+}  
