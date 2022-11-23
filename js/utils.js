@@ -106,10 +106,11 @@ function createBalloons(count) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //* 
-function randomLocations(count) {
+function randomLocations(count,cellI,cellJ) {
 var randLocations = []
 for (var i = 0; i < gLevel.SIZE; i++) {
     for (var j = 0; j < gLevel.SIZE; j++) {
+        if(cellI === i && cellJ === j) continue
         randLocations.push({ i, j })
     }
 }
