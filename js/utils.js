@@ -106,20 +106,20 @@ function createBalloons(count) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //* 
-function randomLocations(count,cellI,cellJ) {
-var randLocations = []
-for (var i = 0; i < gLevel.SIZE; i++) {
-    for (var j = 0; j < gLevel.SIZE; j++) {
-        if(cellI === i && cellJ === j) continue
-        randLocations.push({ i, j })
+function randomLocations(count, cellI, cellJ) {
+    var randLocations = []
+    for (var i = 0; i < gLevel.SIZE; i++) {
+        for (var j = 0; j < gLevel.SIZE; j++) {
+            if (cellI === i && cellJ === j) continue
+            randLocations.push({ i, j })
+        }
     }
-}
-randLocations = shuffle(randLocations)
-var randomCells = []
-for (var i = 0; i < count ; i++) {
-    randomCells.push(randLocations.pop())
-}
-return randomCells
+    randLocations = shuffle(randLocations)
+    var randomCells = []
+    for (var i = 0; i < count; i++) {
+        randomCells.push(randLocations.pop())
+    }
+    return randomCells
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 function shuffle(items) {
@@ -137,11 +137,7 @@ function shuffle(items) {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //* RENDER ONLY CELL TO DOM
 // location is an object like this - { i: 2, j: 7 }
-function renderCell(location, value) {
-    // Select the elCell and set the value
-    const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
-    elCell.innerHTML = value
-}
+
 ////////////////////////////////////////////////////////////////
 //* GET RANDOM COLOR
 function getRandomColor() {
@@ -217,4 +213,6 @@ function getRandomColor() {
     }
     return color;
 }
+
+
 
