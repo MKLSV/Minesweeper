@@ -11,7 +11,8 @@ var gGame
 var gLevel = {
     SIZE: 4,
     MINES: 2,
-    LEVEL: ''
+    LEVEL: '',
+    nightMode: false
 }
 
 
@@ -133,7 +134,7 @@ function gameOver() {
 function restart() {
     resetTimer()
     document.querySelector(`.restart`).innerText = '😀'
-    document.querySelector('.lives').innerText = 'Lives: 🧡🧡🧡'
+    document.querySelector('.lives').innerText = 'Lives: ❤❤❤'
     initGame()
 }
 
@@ -176,4 +177,48 @@ function expert() {
     document.querySelector('.expert').style.backgroundColor = 'Bisque'
     document.querySelector('h2 span').innerHTML = localStorage.getItem('expert')
     restart()
+}
+
+function mode(button) {
+    var h1 =document.querySelector('h1')
+    var h2 =document.querySelector('h2')
+    var footer =  document.querySelector('footer')
+    var lives =  document.querySelector('.lives')
+    if(!gGame.nightMode) {
+        gGame.nightMode = true
+        button.innerText = '☀️'
+        button.style.backgroundColor = 'LightYellow'
+        document.querySelector('body').style.backgroundColor = 'rgb(179, 193, 207)'
+        h1.style.color = 'white'
+        h1.style.textShadow = 'DodgerBlue 1px 0 10px'
+        h2.style.color = 'white'
+        h2.style.textShadow = 'DodgerBlue 1px 0 10px'
+        lives.style.color = 'FloralWhite'
+        lives.style.textShadow = 'DodgerBlue 1px 0 10px'
+        footer.style.color = 'FloralWhite'
+        footer.style.textShadow = 'DodgerBlue 1px 0 10px' 
+        document.querySelector('.restart').style.backgroundColor ='AliceBlue'
+        document.querySelector('.easy').style.backgroundColor ='AliceBlue'
+        document.querySelector('.medium').style.backgroundColor ='AliceBlue'
+        document.querySelector('.expert').style.backgroundColor ='AliceBlue'
+
+    }
+    else {
+        gGame.nightMode = false
+        button.innerText = '🌙'
+        button.style.backgroundColor = 'LightSlateGray'
+        document.querySelector('body').style.backgroundColor = 'rgb(99, 113, 128)'
+        h1.style.color = 'rgb(255, 153, 0)'
+        h1.style.textShadow = 'rgb(255, 0, 0) 1px 0 10px'
+        h2.style.color = 'rgb(255, 153, 0)'
+        h2.style.textShadow = 'rgb(255, 0, 0) 1px 0 10px'
+        lives.style.color = 'rgb(235, 114, 44)'
+        lives.style.textShadow = 'rgb(255, 0, 0) 1px 0 5px'
+        footer.style.color = 'rgb(255, 176, 123)'
+        footer.style.textShadow = 'rgb(255, 123, 0) 1px 0 10px'
+        document.querySelector('.restart').style.backgroundColor ='rgb(182, 195, 207)'
+        document.querySelector('.easy').style.backgroundColor ='rgb(182, 195, 207)'
+        document.querySelector('.medium').style.backgroundColor ='rgb(182, 195, 207)'
+        document.querySelector('.expert').style.backgroundColor ='rgb(182, 195, 207)'
+    }
 }

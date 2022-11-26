@@ -11,9 +11,11 @@
 
 <body onload=" initGame()">
     <h1>Minesweeper</h1>
+
     <div class="game">
-<h2>Best time: <span>00:00</span></h2>
+        <h2>Best time: <span>00:00</span></h2>
         <div class="header">
+            <button class="mode" onclick="mode(this)">🌙</button>
 
             <div class="time"><span id="minutes">00</span>:<span id="seconds">00</span></div>
             <button class="restart" onclick="restart()">🙂</button>
@@ -25,9 +27,12 @@
             <button onclick="expert()" class="expert">Expert</button>
         </div>
         <div class="board-container" oncontextmenu="return false;">
-
         </div>
-        <div class="lives"> Lives: 🧡🧡🧡</div>
+        
+        <div class="lives"> Lives: ❤❤❤</div>
+        
+        
+        
     </div>
 
     <footer>By Matvey Kolosov</footer>

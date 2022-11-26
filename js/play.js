@@ -50,7 +50,7 @@ function cellClicked(elCell, i, j) {
         console.log(elCell)
         document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = 'OrangeRed'
         gGame.livesCount--
-        document.querySelector('.lives').innerText = 'Lives : ' +  ('🧡').repeat(gGame.livesCount)
+        document.querySelector('.lives').innerText = 'Lives : ' +  ('❤').repeat(gGame.livesCount)
         console.log(gGame.livesCount)
         console.log(gGame.shownCount)
         checkGameOver()
