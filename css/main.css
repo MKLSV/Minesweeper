@@ -105,4 +105,16 @@ button:hover{
     margin-top: 5px;
     font-size: 1.3rem;
     text-shadow: rgb(85, 84, 84) 1px 0 10px;
+    
+}
+h2 {
+    /* display: none; */
+    margin-top: 5px;
+    color: rgb(255, 153, 0);
+    text-shadow: rgba(255, 0, 0, 0.651) 1px 0 10px;
+    text-align: center;
+}
+h2 span{
+    color: rgb(146, 255, 255);
+    text-shadow: rgba(255, 0, 0, 0) 1px 0 10px;
 }

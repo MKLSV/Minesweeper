@@ -43,7 +43,6 @@ function startTimer() {
     }
 
     if (seconds > 59) {
-        console.log("seconds");
         minutes++;
         appendMinutes.innerHTML = "0" + minutes;
         seconds = 0;

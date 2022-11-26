@@ -71,25 +71,50 @@ function renderCell(location, value) {
 
 function checkGameOver() {
     var check = true
-    if(gGame.shownCount === gLevel.SIZE*gLevel.SIZE){
-        return winGame()
-    } 
+    // if(gGame.shownCount === gLevel.SIZE*gLevel.SIZE){
+    //     return winGame()
+    // } 
 
-    for (var k = 0; k < mines.length; k++) {
-        if (!mines[k].isMarked) {
-            return
-        }
-    }
+    // for (var k = 0; k < mines.length; k++) {
+    //     if (!mines[k].isMarked && !mines[k].isShown) return
+    // }
 
-    if(gGame.shownCount === gLevel.SIZE*gLevel.SIZE - gLevel.MINES) winGame()
+    if (gGame.shownCount === gLevel.SIZE * gLevel.SIZE - gLevel.MINES + (3 - gGame.livesCount) && gGame.markedCount === gLevel.MINES - (3 - gGame.livesCount)) winGame()
 }
 
 function winGame() {
-    stopTimer()
     document.querySelector(`.restart`).innerText = '😎'
     gGame.isOn = false
+    checkRecord(minutes, seconds)
+    stopTimer()
 }
+function checkRecord(mins, secs) {
+    if (mins < 10) mins = '0' + mins
+    if (secs < 10) secs = '0' + secs
+    var endTime = mins + ':' + secs
+    if (!localStorage.getItem("Record")) {
+        document.querySelector('h2').style.display = 'block'
+        localStorage.setItem("Record", endTime);
+        // document.querySelector('h2').innerHTML = 'Best time: ' + endTime
+    }else {
+        var time = localStorage.getItem("Record").split(':')
+        if (+mins <= +time[0] && +secs < +time[1]) {
+            console.log(+time[0])
+            console.log(+time[1])
+            localStorage.setItem("Record", endTime);
+        }
+    }
+    document.querySelector('h2 span').innerHTML =  localStorage.getItem("Record")
+    
+    console.log(mins, secs)
+    console.log(+mins, +secs)
+    console.log(time)
+    console.log(time[0])
+    console.log(time[1])
 
+
+
+}
 function gameOver() {
     stopTimer()
     document.querySelector('.lives').innerText = 'Game Over'
@@ -106,7 +131,7 @@ function gameOver() {
 function restart() {
     resetTimer()
     document.querySelector(`.restart`).innerText = '😀'
-    document.querySelector('.lives').innerText = 'Lives: 🧡🧡🧡' 
+    document.querySelector('.lives').innerText = 'Lives: 🧡🧡🧡'
     initGame()
 }
 
@@ -116,8 +141,8 @@ function easy() {
         MINES: 2
     }
     document.querySelector('.easy').style.backgroundColor = 'Bisque'
-    document.querySelector('.medium').style.backgroundColor ='AliceBlue'
-    document.querySelector('.expert').style.backgroundColor ='AliceBlue'
+    document.querySelector('.medium').style.backgroundColor = 'AliceBlue'
+    document.querySelector('.expert').style.backgroundColor = 'AliceBlue'
     restart()
 }
 function medium() {
@@ -126,8 +151,8 @@ function medium() {
         MINES: 14
     }
     document.querySelector('.easy').style.backgroundColor = 'AliceBlue'
-    document.querySelector('.medium').style.backgroundColor ='Bisque'
-    document.querySelector('.expert').style.backgroundColor ='AliceBlue'
+    document.querySelector('.medium').style.backgroundColor = 'Bisque'
+    document.querySelector('.expert').style.backgroundColor = 'AliceBlue'
     restart()
 }
 function expert() {
@@ -136,8 +161,7 @@ function expert() {
         MINES: 32
     }
     document.querySelector('.easy').style.backgroundColor = 'AliceBlue'
-    document.querySelector('.medium').style.backgroundColor ='AliceBlue'
-    document.querySelector('.expert').style.backgroundColor ='Bisque'
+    document.querySelector('.medium').style.backgroundColor = 'AliceBlue'
+    document.querySelector('.expert').style.backgroundColor = 'Bisque'
     restart()
 }
-

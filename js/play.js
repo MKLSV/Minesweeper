@@ -58,7 +58,7 @@ function cellClicked(elCell, i, j) {
         console.log('bbooom')
         renderCell({ i, j }, MINE)
         console.log(elCell)
-        document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = 'red'
+        document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = 'OrangeRed'
         gGame.livesCount--
         document.querySelector('.lives').innerText = 'Lives : ' +  ('🧡').repeat(gGame.livesCount)
         console.log(gGame.livesCount)
@@ -104,7 +104,7 @@ function cellMarked(elCell, i, j) {
 
     else {
         console.log('mark')
-        // gGame.markedCount++
+        gGame.markedCount++
         gBoard[i][j].isMarked = true
         renderCell({ i, j }, FLAG)
         if (gBoard[i][j].isMine) checkGameOver()
@@ -134,7 +134,7 @@ function expandShown(board, elCell, cellI, cellJ) {
                 console.log(gGame.shownCount)
                 board[i][j].isShown = true
                 renderCell({ i, j }, ' ')
-                // return expandShown(board, elCell, cellI, cellJ)
+                // expandShown(board, elCell, i, j)
             }
         }
     }
