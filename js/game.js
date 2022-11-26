@@ -10,7 +10,8 @@ var gBoard
 var gGame
 var gLevel = {
     SIZE: 4,
-    MINES: 2
+    MINES: 2,
+    LEVEL: ''
 }
 
 
@@ -45,6 +46,15 @@ function buildBoard() {
     return board
 }
 
+function createMines(board, i, j) {
+
+    var randomCells = randomLocations(gLevel.MINES, i, j)
+    for (var i = 0; i < randomCells.length; i++) {
+        board[randomCells[i].i][randomCells[i].j].isMine = true
+        mines.push(board[randomCells[i].i][randomCells[i].j])
+    }
+    console.log(mines)
+}
 
 function renderBoard(board) {
     var strHTML = '<table border="0"><tbody>'
@@ -70,7 +80,6 @@ function renderCell(location, value) {
 }
 
 function checkGameOver() {
-    var check = true
     // if(gGame.shownCount === gLevel.SIZE*gLevel.SIZE){
     //     return winGame()
     // } 
@@ -89,30 +98,23 @@ function winGame() {
     stopTimer()
 }
 function checkRecord(mins, secs) {
+    var level = gLevel.LEVEL
     if (mins < 10) mins = '0' + mins
     if (secs < 10) secs = '0' + secs
     var endTime = mins + ':' + secs
-    if (!localStorage.getItem("Record")) {
-        document.querySelector('h2').style.display = 'block'
-        localStorage.setItem("Record", endTime);
+    if (!localStorage.getItem(level)) {
+
+        localStorage.setItem(level, endTime);
         // document.querySelector('h2').innerHTML = 'Best time: ' + endTime
-    }else {
-        var time = localStorage.getItem("Record").split(':')
+    } else {
+        var time = localStorage.getItem(level).split(':')
         if (+mins <= +time[0] && +secs < +time[1]) {
             console.log(+time[0])
             console.log(+time[1])
-            localStorage.setItem("Record", endTime);
+            localStorage.setItem(level, endTime);
         }
     }
-    document.querySelector('h2 span').innerHTML =  localStorage.getItem("Record")
-    
-    console.log(mins, secs)
-    console.log(+mins, +secs)
-    console.log(time)
-    console.log(time[0])
-    console.log(time[1])
-
-
+    document.querySelector('h2 span').innerHTML = localStorage.getItem(level)
 
 }
 function gameOver() {
@@ -138,30 +140,40 @@ function restart() {
 function easy() {
     gLevel = {
         SIZE: 4,
-        MINES: 2
+        MINES: 2,
+        LEVEL: 'easy'
     }
     document.querySelector('.easy').style.backgroundColor = 'Bisque'
     document.querySelector('.medium').style.backgroundColor = 'AliceBlue'
     document.querySelector('.expert').style.backgroundColor = 'AliceBlue'
+    document.querySelector('h2 span').innerHTML = localStorage.getItem('easy')
+
+
     restart()
 }
 function medium() {
     gLevel = {
         SIZE: 8,
-        MINES: 14
+        MINES: 14,
+        LEVEL: 'medium'
     }
     document.querySelector('.easy').style.backgroundColor = 'AliceBlue'
     document.querySelector('.medium').style.backgroundColor = 'Bisque'
     document.querySelector('.expert').style.backgroundColor = 'AliceBlue'
+    document.querySelector('h2 span').innerHTML = localStorage.getItem('medium')
+
+
     restart()
 }
 function expert() {
     gLevel = {
         SIZE: 12,
-        MINES: 32
+        MINES: 32,
+        LEVEL: 'expert'
     }
     document.querySelector('.easy').style.backgroundColor = 'AliceBlue'
     document.querySelector('.medium').style.backgroundColor = 'AliceBlue'
     document.querySelector('.expert').style.backgroundColor = 'Bisque'
+    document.querySelector('h2 span').innerHTML = localStorage.getItem('expert')
     restart()
 }

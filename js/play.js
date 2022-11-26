@@ -1,12 +1,3 @@
-function createMines(board, i, j) {
-
-    var randomCells = randomLocations(gLevel.MINES, i, j)
-    for (var i = 0; i < randomCells.length; i++) {
-        board[randomCells[i].i][randomCells[i].j].isMine = true
-        mines.push(board[randomCells[i].i][randomCells[i].j])
-    }
-    console.log(mines)
-}
 
 function setMinesNegsCount(board, cellI, cellJ) {
     var neigsCount = 0
@@ -40,7 +31,6 @@ function cellClicked(elCell, i, j) {
         gGame.isOn = true
         startTime()
     }
-
     if (!gGame.isOn) return
     if (gBoard[i][j].isShown) return
     if (gBoard[i][j].isMarked) {
@@ -114,10 +104,9 @@ function cellMarked(elCell, i, j) {
 
 function expandShown(board, elCell, cellI, cellJ) {
     for (var i = cellI - 1; i <= cellI + 1; i++) {
-        if (i < 0 || i > board.length - 1) continue
-        
+        if (i < 0 || i > board.length - 1) continue   
         for (var j = cellJ - 1; j <= cellJ + 1; j++) {
-            // if (gBoard[cellI][cellJ].isShown) continue
+            // if (gBoard[i][j].isShown) continue
             if (i === cellI && j === cellJ) continue
             if (j < 0 || j > board.length - 1) continue
             gBoard[i][j].minesAroundCount = setMinesNegsCount(gBoard, i, j)
@@ -128,13 +117,14 @@ function expandShown(board, elCell, cellI, cellJ) {
                 renderCell({ i, j }, gBoard[i][j].minesAroundCount)
             }
             else {
-                
+                if (gBoard[i][j].isShown) continue
                 document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = 'gray'
                 if(!gBoard[i][j].isShown)gGame.shownCount++
                 console.log(gGame.shownCount)
+                console.log(i,j)
                 board[i][j].isShown = true
                 renderCell({ i, j }, ' ')
-                // expandShown(board, elCell, i, j)
+                expandShown(board,elCell, i, j)
             }
         }
     }
