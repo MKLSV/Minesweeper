@@ -1,1 +1,1 @@
-# sprint
+# Minesweeper
